@@ -371,7 +371,7 @@ export default {
             if (response.success) {
               file.s3ObjectLocation = response.message
               setTimeout(() => this.dropzone.processFile(file))
-              this.$emit('vdropzone-s3-upload-success', response.message);
+              this.$emit('vdropzone-s3-upload-success', response.s3ObjectLocation, response.s3ObjectEtag);
             } else {
               if ('undefined' !== typeof response.message) {
                 this.$emit('vdropzone-s3-upload-error', response.message);

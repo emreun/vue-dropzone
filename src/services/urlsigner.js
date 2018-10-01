@@ -60,10 +60,13 @@ export default {
       request.onload = function () {
         if (request.status == 201) {
           var s3Error = (new window.DOMParser()).parseFromString(request.response, "text/xml");
-          var successMsg = s3Error.firstChild.children[0].innerHTML;
+          var s3ObjectLocation = s3Error.firstChild.children[0].innerHTML;
+          var s3ObjectEtag = s3Error.firstChild.children[3].innerHTML;
           resolve({
             'success': true,
-            'message': successMsg
+            'message': 'File uploaded successfully.',
+            's3ObjectLocation': s3ObjectLocation,
+            's3ObjectEtag': s3ObjectEtag
           })
         } else {
           var s3Error = (new window.DOMParser()).parseFromString(request.response, "text/xml");
